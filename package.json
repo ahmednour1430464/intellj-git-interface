@@ -1,0 +1,240 @@
+{
+  "name": "intellij-git-interface",
+  "displayName": "IntelliJ Git Interface",
+  "description": "Comprehensive Git interface replicating IntelliJ IDEA's Git functionality for VS Code",
+  "version": "1.0.0",
+  "publisher": "intellij-git-extension",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "SCM Providers",
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "git",
+    "intellij",
+    "version control",
+    "diff",
+    "commit history",
+    "branch visualization"
+  ],
+  "activationEvents": [
+    "onCommand:intellijGit.showGitLog",
+    "onView:intellijGit.gitLog",
+    "onView:intellijGit.changes",
+    "workspaceContains:.git"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "intellijGit.showGitLog",
+        "title": "Show Git Log",
+        "category": "IntelliJ Git",
+        "icon": "$(git-commit)"
+      },
+      {
+        "command": "intellijGit.showGitGraph",
+        "title": "Show Git Graph",
+        "category": "IntelliJ Git",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "intellijGit.showChanges",
+        "title": "Show Changes",
+        "category": "IntelliJ Git",
+        "icon": "$(diff)"
+      },
+      {
+        "command": "intellijGit.stageFile",
+        "title": "Stage File",
+        "category": "IntelliJ Git",
+        "icon": "$(add)"
+      },
+      {
+        "command": "intellijGit.unstageFile",
+        "title": "Unstage File",
+        "category": "IntelliJ Git",
+        "icon": "$(remove)"
+      },
+      {
+        "command": "intellijGit.discardChanges",
+        "title": "Discard Changes",
+        "category": "IntelliJ Git",
+        "icon": "$(discard)"
+      },
+      {
+        "command": "intellijGit.showFileHistory",
+        "title": "Show File History",
+        "category": "IntelliJ Git",
+        "icon": "$(history)"
+      },
+      {
+        "command": "intellijGit.showBlame",
+        "title": "Show Blame",
+        "category": "IntelliJ Git",
+        "icon": "$(person)"
+      },
+      {
+        "command": "intellijGit.cherryPick",
+        "title": "Cherry Pick",
+        "category": "IntelliJ Git",
+        "icon": "$(git-merge)"
+      },
+      {
+        "command": "intellijGit.squashCommits",
+        "title": "Squash Commits",
+        "category": "IntelliJ Git",
+        "icon": "$(combine)"
+      },
+      {
+        "command": "intellijGit.interactiveRebase",
+        "title": "Interactive Rebase",
+        "category": "IntelliJ Git",
+        "icon": "$(git-pull-request)"
+      },
+      {
+        "command": "intellijGit.amendCommit",
+        "title": "Amend Last Commit",
+        "category": "IntelliJ Git",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "intellijGit.rewordCommit",
+        "title": "Reword Commit",
+        "category": "IntelliJ Git",
+        "icon": "$(edit)"
+      }
+    ],
+    "views": {
+      "scm": [
+        {
+          "id": "intellijGit.gitLog",
+          "name": "Git Log",
+          "when": "scmProvider == git"
+        },
+        {
+          "id": "intellijGit.changes",
+          "name": "Changes",
+          "when": "scmProvider == git"
+        },
+        {
+          "id": "intellijGit.fileHistory",
+          "name": "File History",
+          "when": "scmProvider == git"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "intellijGit",
+          "title": "IntelliJ Git",
+          "icon": "$(source-control)"
+        }
+      ]
+    },
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "intellijGit.showFileHistory",
+          "when": "scmProvider == git",
+          "group": "7_modification"
+        },
+        {
+          "command": "intellijGit.showBlame",
+          "when": "scmProvider == git && resourceExtname",
+          "group": "7_modification"
+        }
+      ],
+      "scm/resourceGroup/context": [
+        {
+          "command": "intellijGit.stageFile",
+          "when": "scmProvider == git && scmResourceGroup == workingTree",
+          "group": "inline"
+        },
+        {
+          "command": "intellijGit.unstageFile",
+          "when": "scmProvider == git && scmResourceGroup == index",
+          "group": "inline"
+        },
+        {
+          "command": "intellijGit.discardChanges",
+          "when": "scmProvider == git && scmResourceGroup == workingTree",
+          "group": "destructive"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "intellijGit.showGitGraph",
+          "when": "view == intellijGit.gitLog",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "IntelliJ Git Interface",
+      "properties": {
+        "intellijGit.maxCommitsToShow": {
+          "type": "number",
+          "default": 1000,
+          "description": "Maximum number of commits to show in the git log"
+        },
+        "intellijGit.showGraphInLog": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show graphical branch representation in git log"
+        },
+        "intellijGit.diffViewMode": {
+          "type": "string",
+          "enum": [
+            "sideBySide",
+            "unified"
+          ],
+          "default": "sideBySide",
+          "description": "Default diff view mode"
+        },
+        "intellijGit.ignoreWhitespace": {
+          "type": "boolean",
+          "default": false,
+          "description": "Ignore whitespace changes in diffs"
+        },
+        "intellijGit.autoRefresh": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically refresh views when git state changes"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "d3": "^7.6.1",
+    "moment": "^2.29.4",
+    "simple-git": "^3.15.1"
+  }
+}

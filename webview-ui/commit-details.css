@@ -1,0 +1,369 @@
+/* Commit Details Webview Styles */
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: var(--vscode-font-family);
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+    line-height: 1.5;
+}
+
+.commit-header {
+    border-bottom: 1px solid var(--vscode-editorGroup-border);
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.commit-header h1 {
+    margin: 0 0 12px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--vscode-editor-foreground);
+    word-wrap: break-word;
+}
+
+.commit-meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 16px;
+    font-size: 13px;
+    color: var(--vscode-descriptionForeground);
+}
+
+.commit-meta .label {
+    font-weight: 600;
+    color: var(--vscode-editor-foreground);
+}
+
+.hash {
+    font-family: var(--vscode-editor-fontFamily, 'Courier New', monospace);
+    background-color: var(--vscode-textCodeBlock-background);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    border: 1px solid var(--vscode-editorGroup-border);
+}
+
+.author {
+    color: var(--vscode-editor-foreground);
+}
+
+.date {
+    color: var(--vscode-descriptionForeground);
+}
+
+.commit-body {
+    margin-bottom: 24px;
+}
+
+.commit-body h2 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--vscode-editor-foreground);
+}
+
+.commit-body pre {
+    background-color: var(--vscode-textCodeBlock-background);
+    border: 1px solid var(--vscode-editorGroup-border);
+    border-radius: 4px;
+    padding: 12px;
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: var(--vscode-editor-fontFamily, 'Courier New', monospace);
+    font-size: 13px;
+    line-height: 1.4;
+    overflow-x: auto;
+}
+
+.commit-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    padding: 16px;
+    background-color: var(--vscode-editorWidget-background);
+    border: 1px solid var(--vscode-editorWidget-border);
+    border-radius: 4px;
+}
+
+.commit-actions button {
+    padding: 6px 12px;
+    border: 1px solid var(--vscode-button-border);
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: var(--vscode-font-family);
+    transition: background-color 0.2s ease;
+}
+
+.commit-actions button:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+.commit-actions button:focus {
+    outline: 1px solid var(--vscode-focusBorder);
+    outline-offset: 2px;
+}
+
+.commit-actions button.primary {
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+}
+
+.commit-actions button.secondary {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+}
+
+.commit-files {
+    margin-top: 24px;
+}
+
+.commit-files h2 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--vscode-editor-foreground);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.commit-files h2::before {
+    content: '📁';
+    font-size: 14px;
+}
+
+#file-list {
+    border: 1px solid var(--vscode-editorGroup-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--vscode-editorGroup-border);
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-item:hover {
+    background-color: var(--vscode-list-hoverBackground);
+}
+
+.file-status {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    margin-right: 8px;
+    color: white;
+}
+
+.file-status.added {
+    background-color: var(--vscode-gitDecoration-addedResourceForeground);
+}
+
+.file-status.modified {
+    background-color: var(--vscode-gitDecoration-modifiedResourceForeground);
+}
+
+.file-status.deleted {
+    background-color: var(--vscode-gitDecoration-deletedResourceForeground);
+}
+
+.file-status.renamed {
+    background-color: var(--vscode-gitDecoration-renamedResourceForeground);
+}
+
+.file-path {
+    flex: 1;
+    font-family: var(--vscode-editor-fontFamily, 'Courier New', monospace);
+    font-size: 13px;
+    color: var(--vscode-editor-foreground);
+}
+
+.file-stats {
+    font-size: 12px;
+    color: var(--vscode-descriptionForeground);
+    margin-left: 8px;
+}
+
+.additions {
+    color: var(--vscode-gitDecoration-addedResourceForeground);
+}
+
+.deletions {
+    color: var(--vscode-gitDecoration-deletedResourceForeground);
+}
+
+/* Loading and Error States */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: var(--vscode-descriptionForeground);
+    font-size: 14px;
+}
+
+.loading::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--vscode-progressBar-background);
+    border-top: 2px solid var(--vscode-button-background);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error {
+    padding: 16px;
+    background-color: var(--vscode-inputValidation-errorBackground);
+    border: 1px solid var(--vscode-inputValidation-errorBorder);
+    border-radius: 4px;
+    color: var(--vscode-inputValidation-errorForeground);
+    font-size: 13px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        padding: 12px;
+    }
+    
+    .commit-actions {
+        flex-direction: column;
+    }
+    
+    .commit-actions button {
+        width: 100%;
+    }
+    
+    .commit-meta {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+    
+    .file-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .file-stats {
+        margin-left: 0;
+    }
+}
+
+/* Accessibility */
+button:focus-visible {
+    outline: 2px solid var(--vscode-focusBorder);
+    outline-offset: 2px;
+}
+
+.file-item:focus {
+    outline: 1px solid var(--vscode-focusBorder);
+    outline-offset: -1px;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Code highlighting in commit messages */
+.commit-body code {
+    background-color: var(--vscode-textCodeBlock-background);
+    border: 1px solid var(--vscode-editorGroup-border);
+    border-radius: 2px;
+    padding: 1px 4px;
+    font-family: var(--vscode-editor-fontFamily, 'Courier New', monospace);
+    font-size: 12px;
+}
+
+/* Links in commit messages */
+.commit-body a {
+    color: var(--vscode-textLink-foreground);
+    text-decoration: none;
+}
+
+.commit-body a:hover {
+    color: var(--vscode-textLink-activeForeground);
+    text-decoration: underline;
+}
+
+/* Diff preview */
+.diff-preview {
+    margin-top: 16px;
+    border: 1px solid var(--vscode-editorGroup-border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.diff-header {
+    background-color: var(--vscode-editorGroupHeader-tabsBackground);
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--vscode-editorGroup-border);
+}
+
+.diff-content {
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: var(--vscode-editor-fontFamily, 'Courier New', monospace);
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.diff-line {
+    padding: 2px 8px;
+    white-space: pre;
+}
+
+.diff-line.added {
+    background-color: var(--vscode-diffEditor-insertedTextBackground);
+    color: var(--vscode-diffEditor-insertedTextForeground);
+}
+
+.diff-line.removed {
+    background-color: var(--vscode-diffEditor-removedTextBackground);
+    color: var(--vscode-diffEditor-removedTextForeground);
+}
+
+.diff-line.context {
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+}

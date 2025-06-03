@@ -1,0 +1,279 @@
+/* Git Graph Webview Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--vscode-font-family);
+    background-color: var(--vscode-editor-background);
+    color: var(--vscode-editor-foreground);
+    overflow: hidden;
+}
+
+#toolbar {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background-color: var(--vscode-editorGroupHeader-tabsBackground);
+    border-bottom: 1px solid var(--vscode-editorGroup-border);
+    gap: 8px;
+}
+
+#toolbar button {
+    padding: 4px 12px;
+    border: 1px solid var(--vscode-button-border);
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#toolbar button:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+#searchInput {
+    flex: 1;
+    padding: 4px 8px;
+    border: 1px solid var(--vscode-input-border);
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border-radius: 2px;
+    font-size: 12px;
+}
+
+#searchInput:focus {
+    outline: 1px solid var(--vscode-focusBorder);
+}
+
+#graph-container {
+    height: calc(100vh - 50px);
+    overflow: auto;
+    position: relative;
+}
+
+#git-graph {
+    width: 100%;
+    height: 100%;
+    background-color: var(--vscode-editor-background);
+}
+
+/* Graph Elements */
+.commit-node {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.commit-node:hover {
+    stroke-width: 3;
+    filter: brightness(1.2);
+}
+
+.commit-node.selected {
+    stroke: var(--vscode-focusBorder);
+    stroke-width: 3;
+}
+
+.commit-edge {
+    fill: none;
+    stroke-width: 2;
+    opacity: 0.8;
+}
+
+.commit-label {
+    font-family: var(--vscode-font-family);
+    font-size: 12px;
+    fill: var(--vscode-editor-foreground);
+    pointer-events: none;
+    user-select: none;
+}
+
+.commit-message {
+    font-weight: normal;
+}
+
+.commit-author {
+    font-size: 10px;
+    fill: var(--vscode-descriptionForeground);
+}
+
+.commit-date {
+    font-size: 10px;
+    fill: var(--vscode-descriptionForeground);
+}
+
+.branch-label {
+    font-size: 11px;
+    font-weight: bold;
+    fill: var(--vscode-editor-foreground);
+    text-anchor: middle;
+}
+
+/* Commit Details Panel */
+#commit-details {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 300px;
+    background-color: var(--vscode-editorWidget-background);
+    border: 1px solid var(--vscode-editorWidget-border);
+    border-radius: 4px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+#commit-details.hidden {
+    display: none;
+}
+
+#commit-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: var(--vscode-editor-foreground);
+}
+
+#commit-info p {
+    margin: 4px 0;
+    font-size: 12px;
+    color: var(--vscode-descriptionForeground);
+}
+
+#commit-info .hash {
+    font-family: monospace;
+    background-color: var(--vscode-textCodeBlock-background);
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-size: 11px;
+}
+
+#commit-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#commit-actions button {
+    padding: 4px 8px;
+    border: 1px solid var(--vscode-button-border);
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+#commit-actions button:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+
+#commit-actions button.primary {
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+}
+
+#commit-actions button.secondary {
+    background-color: var(--vscode-button-secondaryBackground);
+    color: var(--vscode-button-secondaryForeground);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--vscode-scrollbarSlider-background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--vscode-scrollbarSlider-background);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--vscode-scrollbarSlider-hoverBackground);
+}
+
+/* Loading State */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--vscode-descriptionForeground);
+    font-size: 14px;
+}
+
+.loading::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--vscode-progressBar-background);
+    border-top: 2px solid var(--vscode-button-background);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: var(--vscode-errorForeground);
+    font-size: 14px;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    #commit-details {
+        position: fixed;
+        top: 50px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+    
+    #toolbar {
+        flex-wrap: wrap;
+    }
+    
+    #searchInput {
+        min-width: 150px;
+    }
+}
+
+/* Accessibility */
+.commit-node:focus {
+    outline: 2px solid var(--vscode-focusBorder);
+    outline-offset: 2px;
+}
+
+button:focus {
+    outline: 1px solid var(--vscode-focusBorder);
+    outline-offset: 1px;
+}
+
+/* Animation for smooth transitions */
+.commit-node, .commit-edge {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
