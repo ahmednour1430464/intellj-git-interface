@@ -4,6 +4,10 @@
   "description": "Comprehensive Git interface replicating IntelliJ IDEA's Git functionality for VS Code",
   "version": "1.0.0",
   "publisher": "intellij-git-extension",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmednour1430464/intellj-git-interface.git"
+  },
   "engines": {
     "vscode": "^1.74.0"
   },
